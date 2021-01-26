@@ -1,28 +1,28 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  DynamoDB:
+  DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
         -
-          AttributeName: "Site"
-          AttributeType: "N"
+          AttributeName: id
+          AttributeType: "S"
       KeySchema:
         -
-          AttributeName: "Site"
+          AttributeName: "visits"
           KeyType: "HASH"
       ProvisionedThroughput:
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
       TableName: "resumeviewcounter"
 
-  
+
   ResViewCounterFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: Lambda/
-      Handler: app.lamba_handler
+      Handler: app.lambda_handler
       Runtime: python3.8
       Policies: AmazonDynamoDBFullAccess
       Events:
@@ -31,8 +31,14 @@ Resources:
           Properties:
             Path: '/counter'
             Method: get
+      Environment:
+        Variables:
+          databaseName : !Ref DynamoDBTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DynamoDBTable
 
 Outputs:
   ResViewCounterApi:
     Description: "API Gateway endpoint URL for Prod stage for Lambda function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/counter/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/counter"
