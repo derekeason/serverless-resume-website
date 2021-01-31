@@ -462,14 +462,10 @@
 
 
     <div class="article-style" itemprop="articleBody">
-      Static website hosted in AWS S3. The site uses HTML and CSS for styling. A Lambda function is used to
+      Serverless website hosted on AWS. The site is styled with HTML and CSS for the frontend; Python for the backend.
+      The project uses multiple AWS resources, including: S3, DynamoDB, CloudFormation, CloudFront, API Gateway, and a Lambda function.
+      CI/CD powered by GitHub Actions.
     </div>
-
-
-    <div class="stream-meta article-metadata">
-
-    </div>
-
 
     <div class="btn-links">
 
@@ -501,10 +497,6 @@
     </div>
   </section>
 
-  <section id="research" class="home-section wg-pages   "  >
-    <div class="container">
-
-
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
@@ -522,9 +514,6 @@
 
   <div class="container">
     <footer class="site-footer">
-
-
-
       <div>
           <p style = "text-align: center;">
           Visits: <span id="visits">0</span>
@@ -545,30 +534,7 @@
   </p>
 
 
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 </body>
 </html>
