@@ -13,7 +13,7 @@ jobs:
           aws-region: us-west-1
 
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync . s3://testderekeason.com --acl public-read --delete
+        run: aws s3 sync . s3://derekeason.io --acl public-read --delete
       - name: Invalidate Cloudfront cache
         run: |
           aws configure set preview.cloudfront true
