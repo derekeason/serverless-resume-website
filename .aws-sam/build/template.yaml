@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'cloud-resume-challenge Sample SAM Template for cloud-resume-challenge
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  GetVisitorCountFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GetVisitorCountFunction
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: statistics
+      Events:
+        HttpGet:
+          Type: Api
+          Properties:
+            Path: /counter
+            Method: get
+  VisitorCountTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: statistics
+      AttributeDefinitions:
+      - AttributeName: Site
+        AttributeType: N
+      KeySchema:
+      - AttributeName: Site
+        KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '1'
+        WriteCapacityUnits: '1'
+Outputs:
+  GetVisitorCountApi:
+    Description: API Gateway endpoint URL for Prod stage for Visitor Count function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/counter
+  GetVisitorCountFunction:
+    Description: Visitor Count Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetVisitorCountFunction
+      - Arn
+  GetVisitorFunctionIamRole:
+    Description: Implicit IAM Role created for Visitor Count function
+    Value:
+      Fn::GetAtt:
+      - GetVisitorCountFunctionRole
+      - Arn
